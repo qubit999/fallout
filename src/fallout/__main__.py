@@ -7,8 +7,8 @@ def main():
     """
 
     fallout = fa()
-    chemicals = fallout.get_radioactive_chemicals()
-    chemical_names = list(chemicals)  # Assume chemicals is iterable (e.g., a dict of {name: value})
+    radioactive_substances = fallout.get_radioactive_substances()
+    radioactive_substances_names = list(radioactive_substances)
 
     print("=" * 50)
     print("Welcome to the Fallout Simulator".center(50))
@@ -16,8 +16,8 @@ def main():
 
     while True:
         print("\nAvailable Radioactive Substances:")
-        for idx, chemical in enumerate(chemical_names, start=1):
-            print(f"  {idx}. {chemical}")
+        for idx, substance in enumerate(radioactive_substances_names, start=1):
+            print(f"  {idx}. {substance}")
         print("  q. Quit")
 
         choice = input("\nEnter the number of the radioactive substance (or 'q' to quit): ").strip()
@@ -27,10 +27,10 @@ def main():
 
         try:
             index = int(choice) - 1
-            if index < 0 or index >= len(chemical_names):
+            if index < 0 or index >= len(radioactive_substances_names):
                 print("Invalid selection. Please choose a valid number from the list.")
                 continue
-            selected_chemical = chemical_names[index]
+            selected_substance = radioactive_substances_names[index]
         except ValueError:
             print("Invalid input. Please enter a number corresponding to a substance.")
             continue
@@ -38,7 +38,7 @@ def main():
         # Get gram input
         while True:
             try:
-                gram_input = input(f"Enter the amount in grams for {selected_chemical}: ").strip()
+                gram_input = input(f"Enter the amount in grams for {selected_substance}: ").strip()
                 gram = float(gram_input)
                 if gram <= 0:
                     print("Amount must be a positive number.")
@@ -61,12 +61,12 @@ def main():
 
         # Computations
         remaining_gram = fallout.calculate_remaining_gram(gram, number_of_halflifes)
-        risk, siverts = fallout.calculate_risk(selected_chemical, remaining_gram)
-        decay_time = fallout.calculate_decay_time(selected_chemical, number_of_halflifes)
+        risk, siverts = fallout.calculate_risk(selected_substance, remaining_gram)
+        decay_time = fallout.calculate_decay_time(selected_substance, number_of_halflifes)
 
         # Display results
         print("\n" + "-" * 50)
-        print(f"Results for {selected_chemical}:")
+        print(f"Results for {selected_substance}:")
         print(f"  Remaining mass after decay: {remaining_gram:.2f} grams")
         print(f"  Risk level: {risk}")
         print(f"  Radiation exposure (siverts): {siverts}")

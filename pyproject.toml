@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fallout"
-version = "0.0.3"
+version = "0.0.4"
 description = "The Fallout library provides simple methods for calculating decay times, remaining mass, and radiation dose (siverts) for a set of predefined radioactive chemicals."
 readme = "README.md"
 license = {file = "LICENSE"}

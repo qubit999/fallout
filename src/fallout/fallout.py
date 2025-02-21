@@ -1,26 +1,26 @@
 """
 Fallout Library
-This module defines the Fallout class for calculating properties of radioactive chemicals.
+This module defines the Fallout class for calculating properties of radioactive substances.
 """
 
 from typing import Dict, Optional, Union
 
 class Fallout():
     """
-    Fallout class to compute properties of radioactive chemicals.
+    Fallout class to compute properties of radioactive substances.
 
     Attributes:
-        radioactive_chemicals (Dict[str, Dict[str, Union[float, str]]]): Dictionary with detailed info about each chemical.
+        radioactive_substances (Dict[str, Dict[str, Union[float, str]]]): Dictionary with detailed info about each chemical.
     """
-    def __init__(self, radioactive_chemicals: Optional[Dict[str, Dict[str, Union[float, str]]]] = None):
+    def __init__(self, radioactive_substances: Optional[Dict[str, Dict[str, Union[float, str]]]] = None):
         """
-        Initialize Fallout with a default dictionary of radioactive chemicals if none provided.
+        Initialize Fallout with a default dictionary of radioactive substances if none provided.
 
         Args:
-            radioactive_chemicals (Optional[Dict[str, Dict[str, Union[float, str]]]]): Custom radioactive chemical data.
+            radioactive_substances (Optional[Dict[str, Dict[str, Union[float, str]]]]): Custom radioactive chemical data.
         """
-        if radioactive_chemicals is None:
-            self.radioactive_chemicals = {
+        if radioactive_substances is None:
+            self.radioactive_substances = {
                 # Nuclear Fuel Cycle Isotopes
                 "Uranium-235": {"siverts_per_gram": 2.3, "halflife": 7.04e8, "category": "Fissile Material"},  # [11][15]
                 "Plutonium-239": {"siverts_per_gram": 575, "halflife": 24100, "category": "Weapons Material"},  # [9][13]
@@ -79,16 +79,16 @@ class Fallout():
                 "Einsteinium-254": {"siverts_per_gram": 4.5e5, "halflife": 0.75, "category": "High Activity"},  # [4][11]
             }
         else:
-            self.radioactive_chemicals = radioactive_chemicals
+            self.radioactive_substances = radioactive_substances
 
-    def get_radioactive_chemicals(self) -> Dict[str, Dict[str, Union[float, str]]]:
+    def get_radioactive_substances(self) -> Dict[str, Dict[str, Union[float, str]]]:
         """
-        Return the dictionary of radioactive chemicals.
+        Return the dictionary of radioactive substances.
         
         Returns:
-            Dict[str, Dict[str, Union[float, str]]]: The chemicals and their properties.
+            Dict[str, Dict[str, Union[float, str]]]: The substances and their properties.
         """
-        return self.radioactive_chemicals
+        return self.radioactive_substances
 
     def calculate_decay_time(self, type, number_of_halflifes) -> float:
         """
@@ -101,7 +101,7 @@ class Fallout():
         Returns:
             float: The calculated decay time.
         """
-        return pow(0.5, number_of_halflifes) * self.radioactive_chemicals[type]["halflife"]
+        return pow(0.5, number_of_halflifes) * self.radioactive_substances[type]["halflife"]
 
     def calculate_remaining_gram(self, gram, number_of_halflifes) -> float:
         """
@@ -127,7 +127,7 @@ class Fallout():
         Returns:
             float: The calculated siverts.
         """
-        return self.radioactive_chemicals[type]["siverts_per_gram"] * gram
+        return self.radioactive_substances[type]["siverts_per_gram"] * gram
 
     def calculate_risk(self, type, gram) -> tuple:
         """
