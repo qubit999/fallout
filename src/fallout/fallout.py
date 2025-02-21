@@ -132,6 +132,9 @@ class Fallout():
     def calculate_risk(self, type, gram) -> tuple:
         """
         Determine the risk level based on calculated siverts.
+        OK = 1 sivert or less
+        Unsafe = 1 to 5 siverts
+        Lethal = more than 5 siverts
 
         Args:
             type (str): Name of the chemical.
@@ -142,26 +145,8 @@ class Fallout():
         """
         siverts = self.calculate_siverts(type, gram)
         if siverts < 1:
-            return "Safe", siverts
+            return "OK", siverts
         elif 1 <= siverts < 5:
             return "Unsafe", siverts
         else:
-            return "Deadly", siverts
-
-def test():
-    """
-    Console interface for the Fallout calculations.
-    """
-    type = input("Chemical type: ")
-    gram = float(input("Amount in gram: "))
-    number_of_halflifes = int(input("Number of half-lifes: "))
-
-    fallout = Fallout()
-    risk, siverts = fallout.calculate_risk(type, fallout.calculate_remaining_gram(gram, number_of_halflifes))
-    decay_time = fallout.calculate_decay_time(type, number_of_halflifes)
-    print(f"Risk: {risk}")
-    print(f"Siverts: {siverts}")
-    print(f"Decay time: {decay_time}")
-
-if __name__ == "__main__":
-    test()
+            return "Lethal", siverts
