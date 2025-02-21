@@ -46,5 +46,3 @@ If you run the `fallout.py` file directly:
 python fallout.py
 ```
 It will prompt for chemical type, amount in grams, and number of half-lives to compute safety and decay information.
-
-```
